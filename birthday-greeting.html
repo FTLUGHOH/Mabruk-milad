@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Greeting 🎉</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        .animate-bounce {
+            animation: bounce 1s infinite;
+        }
+
+        .animate-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        .animate-scale-in {
+            animation: scaleIn 0.5s ease-out forwards;
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        .animate-slide-up {
+            animation: slideUp 0.8s ease-out forwards;
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(40px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .text-fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        .text-fade-in:nth-child(1) { animation-delay: 0.2s; }
+        .text-fade-in:nth-child(2) { animation-delay: 0.4s; }
+        .text-fade-in:nth-child(3) { animation-delay: 0.6s; }
+        .text-fade-in:nth-child(4) { animation-delay: 0.8s; }
+
+        .emoji-container {
+            animation: fadeIn 1s ease-out 1s forwards;
+            opacity: 0;
+        }
+    </style>
+</head>
+<body class="m-0 p-0 overflow-x-hidden">
+    <div id="app" class="min-h-screen bg-gradient-to-br from-black via-zinc-900 to-zinc-800 flex items-center justify-center p-6 overflow-hidden text-white relative">
+        <!-- Background Emojis -->
+        <div class="absolute inset-0 opacity-20 pointer-events-none">
+            <div class="absolute top-10 left-10 text-4xl animate-bounce">✨</div>
+            <div class="absolute top-24 right-16 text-3xl animate-pulse">🎈</div>
+            <div class="absolute bottom-16 left-20 text-4xl animate-pulse">🎂</div>
+            <div class="absolute bottom-20 right-10 text-3xl animate-bounce">🤍</div>
+        </div>
+
+        <!-- Main Content -->
+        <div id="content"></div>
+    </div>
+
+    <script>
+        let opened = false;
+
+        function render() {
+            const content = document.getElementById('content');
+            
+            if (!opened) {
+                content.innerHTML = `
+                    <div class="max-w-md w-full bg-white/10 backdrop-blur-xl border border-white/10 rounded-3xl p-10 shadow-2xl text-center animate-scale-in">
+                        <h1 class="text-4xl font-bold mb-6 leading-tight">
+                            Ada sesuatu buat kamu 🎁
+                        </h1>
+                        <p class="text-zinc-300 leading-8 mb-8">
+                            Klik tombol di bawah ini ✨
+                        </p>
+                        <button
+                            onclick="handleOpen()"
+                            class="px-8 py-4 rounded-2xl bg-white text-black font-semibold hover:scale-105 transition-all duration-300 cursor-pointer"
+                        >
+                            Open Message 🤍
+                        </button>
+                    </div>
+                `;
+            } else {
+                content.innerHTML = `
+                    <div class="max-w-xl w-full bg-white/10 backdrop-blur-xl border border-white/10 rounded-3xl p-10 shadow-2xl text-center animate-slide-up">
+                        <p class="text-zinc-300 text-sm tracking-[0.3em] mb-4">
+                            HAPPY 17TH BIRTHDAY
+                        </p>
+
+                        <h1 class="text-4xl md:text-5xl font-bold mb-8 leading-tight animate-scale-in">
+                            عيد ميلاد سعيد 🎉🤍
+                        </h1>
+
+                        <div class="space-y-4 text-lg leading-9 text-zinc-100">
+                            <p class="text-fade-in">بارك الله في عمرك،</p>
+                            <p class="text-fade-in">وأسعد الله قلبك،</p>
+                            <p class="text-fade-in">وحقّق الله أحلامك،</p>
+                            <p class="text-fade-in">وجعل أيّامك كلّها فرحًا وراحةً.</p>
+                        </div>
+
+                        <div class="mt-10 text-zinc-300 leading-8 text-base animate-fade-in" style="animation-delay: 1s; opacity: 0;">
+                            <p>Semoga selalu dikelilingi hal-hal baik,</p>
+                            <p>dan semoga semua yang disemogakan</p>
+                            <p>pelan-pelan jadi kenyataan ✨</p>
+                        </div>
+
+                        <div class="mt-10 flex items-center justify-center gap-3 text-3xl animate-pulse emoji-container">
+                            <span>🎂</span>
+                            <span>✨</span>
+                            <span>🤍</span>
+                            <span>🎉</span>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        function handleOpen() {
+            opened = true;
+            render();
+        }
+
+        // Initial render
+        render();
+    </script>
+</body>
+</html>
