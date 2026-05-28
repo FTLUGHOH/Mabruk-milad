@@ -34,6 +34,20 @@
                 transform: translateY(0);
             }
         }
+        @keyframes popFade {
+            0% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
         .animate-bounce {
             animation: bounce 1s infinite;
         }
@@ -46,8 +60,29 @@
         .animate-up {
             animation: fadeInUp 0.8s ease-out forwards;
         }
+        .pop-fade {
+            animation: popFade 0.6s ease-out forwards;
+        }
         .hidden {
             display: none !important;
+        }
+        .scroll-container {
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+        .scroll-container::-webkit-scrollbar {
+            width: 8px;
+        }
+        .scroll-container::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+        .scroll-container::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+        }
+        .scroll-container::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.5);
         }
     </style>
 </head>
@@ -95,19 +130,31 @@
             <h1 class="text-3xl md:text-4xl font-bold mb-2 leading-tight">Muhammad Dion Rizqie 🎉</h1>
             <h2 class="text-3xl md:text-4xl font-bold mb-8 leading-tight">عيد ميلاد سعيد 🤍</h2>
 
-            <!-- Messages -->
-            <div class="space-y-4 text-lg leading-9 text-zinc-100">
-                <p>بارك الله في عمرك،</p>
-                <p>وأسعد الله قلبك،</p>
-                <p>وحقّق الله أحلامك،</p>
-                <p>وجعل أيّامك كلّها فرحًا وراحةً.</p>
-            </div>
+            <!-- Scrollable Messages -->
+            <div class="scroll-container">
+                <!-- Arabic Blessings -->
+                <div class="space-y-4 text-lg leading-9 text-zinc-100 mb-6">
+                    <p class="pop-fade" style="animation-delay: 0s">بارك الله في عمرك،</p>
+                    <p class="pop-fade" style="animation-delay: 0.1s">وأسعد الله قلبك،</p>
+                    <p class="pop-fade" style="animation-delay: 0.2s">وحقّق الله أحلامك،</p>
+                    <p class="pop-fade" style="animation-delay: 0.3s">وجعل أيّامك كلّها فرحًا وراحةً.</p>
+                </div>
 
-            <!-- Additional Message -->
-            <div class="mt-10 text-zinc-300 leading-8 text-base">
-                <p>Semoga selalu dikelilingi hal-hal baik,</p>
-                <p>dan semoga semua yang disemogakan</p>
-                <p>pelan-pelan jadi kenyataan ✨</p>
+                <!-- Indonesian Messages -->
+                <div class="mt-8 text-zinc-300 leading-8 text-base space-y-3">
+                    <p class="pop-fade" style="animation-delay: 0.4s">Semoga semua doa baik</p>
+                    <p class="pop-fade" style="animation-delay: 0.5s">pelan-pelan jadi nyata.</p>
+                </div>
+
+                <div class="mt-8 text-zinc-300 leading-8 text-base space-y-3">
+                    <p class="pop-fade" style="animation-delay: 0.6s">Semoga selalu diberi bahagia,</p>
+                    <p class="pop-fade" style="animation-delay: 0.7s">hati yang tenang,</p>
+                    <p class="pop-fade" style="animation-delay: 0.8s">dan langkah yang dimudahkan.</p>
+                </div>
+
+                <div class="mt-8 text-2xl font-bold text-center">
+                    <p class="pop-fade" style="animation-delay: 0.9s">17 looks good on you ✨🎉</p>
+                </div>
             </div>
 
             <!-- Emoji Footer -->
