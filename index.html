@@ -5,9 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy Birthday - Muhammad Dion Rizqie 🎉</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/framer-motion/10.16.4/framer-motion.min.js"></script>
-    <script src="https://react.dev/cdn/react/18/umd/react.production.min.js"></script>
-    <script src="https://react.dev/cdn/react-dom/18/umd/react-dom.production.min.js"></script>
     <style>
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
@@ -17,114 +14,138 @@
             0%, 100% { opacity: 1; }
             50% { opacity: 0.5; }
         }
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
         .animate-bounce {
             animation: bounce 1s infinite;
         }
         .animate-pulse {
             animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
         }
+        .animate-in {
+            animation: fadeInScale 0.6s ease-out forwards;
+        }
+        .animate-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        .hidden {
+            display: none !important;
+        }
     </style>
 </head>
-<body>
-    <div id="root"></div>
+<body class="m-0 p-0 overflow-hidden">
+    <div class="min-h-screen bg-gradient-to-br from-black via-zinc-900 to-zinc-800 flex items-center justify-center p-6 overflow-hidden text-white relative">
+        <!-- Background decorations -->
+        <div class="absolute inset-0 opacity-20 pointer-events-none">
+            <div class="absolute top-10 left-10 text-4xl animate-bounce">✨</div>
+            <div class="absolute top-24 right-16 text-3xl animate-pulse">🎈</div>
+            <div class="absolute bottom-16 left-20 text-4xl animate-pulse">🎂</div>
+            <div class="absolute bottom-20 right-10 text-3xl animate-bounce">🤍</div>
+        </div>
+
+        <!-- Card Container -->
+        <div id="cardContainer" class="max-w-md w-full bg-white/10 backdrop-blur-xl border border-white/10 rounded-3xl p-10 shadow-2xl text-center animate-in relative z-10">
+            <!-- Image -->
+            <div class="mb-6 flex justify-center">
+                <img src="./dion-rizqie.jpg" alt="Muhammad Dion Rizqie" class="w-32 h-32 rounded-full border-4 border-white/20 shadow-lg object-cover" onerror="this.src='https://raw.githubusercontent.com/FTLUGHOH/Mabruk-milad/main/dion-rizqie.jpg'">
+            </div>
+
+            <!-- Name -->
+            <h1 class="text-4xl font-bold mb-2 leading-tight">Muhammad Dion Rizqie 🎁</h1>
+
+            <!-- Messages -->
+            <p class="text-zinc-300 leading-8 mb-8">Ada sesuatu buat kamu ✨</p>
+            <p class="text-zinc-300 leading-8 mb-8">Klik tombol di bawah ini ✨</p>
+
+            <!-- Button -->
+            <button id="openBtn" onclick="openMessage()" class="px-8 py-4 rounded-2xl bg-white text-black font-semibold hover:scale-105 transition-all duration-300 cursor-pointer border-none">
+                Open Message 🤍
+            </button>
+        </div>
+
+        <!-- Full Message Card (Hidden) -->
+        <div id="messageCard" class="hidden max-w-xl w-full bg-white/10 backdrop-blur-xl border border-white/10 rounded-3xl p-10 shadow-2xl text-center animate-up relative z-10">
+            <!-- Image -->
+            <div class="mb-6 flex justify-center">
+                <img src="./dion-rizqie.jpg" alt="Muhammad Dion Rizqie" class="w-40 h-40 rounded-full border-4 border-white/20 shadow-lg object-cover" onerror="this.src='https://raw.githubusercontent.com/FTLUGHOH/Mabruk-milad/main/dion-rizqie.jpg'">
+            </div>
+
+            <!-- Header -->
+            <p class="text-zinc-300 text-sm tracking-[0.3em] mb-4">HAPPY 17TH BIRTHDAY</p>
+
+            <!-- Names -->
+            <h1 class="text-3xl md:text-4xl font-bold mb-2 leading-tight">Muhammad Dion Rizqie 🎉</h1>
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 leading-tight">عيد ميلاد سعيد 🤍</h2>
+
+            <!-- Messages -->
+            <div class="space-y-4 text-lg leading-9 text-zinc-100">
+                <p>بارك الله في عمرك،</p>
+                <p>وأسعد الله قلبك،</p>
+                <p>وحقّق الله أحلامك،</p>
+                <p>وجعل أيّامك كلّها فرحًا وراحةً.</p>
+            </div>
+
+            <!-- Additional Message -->
+            <div class="mt-10 text-zinc-300 leading-8 text-base">
+                <p>Semoga selalu dikelilingi hal-hal baik,</p>
+                <p>dan semoga semua yang disemogakan</p>
+                <p>pelan-pelan jadi kenyataan ✨</p>
+            </div>
+
+            <!-- Emoji Footer -->
+            <div class="mt-10 flex items-center justify-center gap-3 text-3xl animate-pulse">
+                <span>🎂</span>
+                <span>✨</span>
+                <span>🤍</span>
+                <span>🎉</span>
+            </div>
+        </div>
+    </div>
 
     <script>
-        function BirthdayGreeting() {
-            const [opened, setOpened] = React.useState(false);
+        // Start audio on page load
+        window.addEventListener('load', function() {
+            const audio = new Audio('./birthday-song.mp3');
+            audio.loop = true;
+            audio.volume = 0.5;
+            
+            // Try to play
+            const playPromise = audio.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(error => {
+                    console.log("Autoplay prevented, waiting for user interaction");
+                    // Fallback: play on first click
+                    document.addEventListener('click', function playOnClick() {
+                        audio.play();
+                        document.removeEventListener('click', playOnClick);
+                    }, { once: true });
+                });
+            }
+        });
 
-            React.useEffect(() => {
-                const audio = new Audio('./birthday-song.mp3');
-                audio.autoplay = true;
-                audio.loop = true;
-                audio.volume = 0.5;
-                audio.play().catch(error => console.log("Autoplay prevented:", error));
-
-                return () => {
-                    audio.pause();
-                    audio.currentTime = 0;
-                };
-            }, []);
-
-            return React.createElement(
-                'div',
-                { className: 'min-h-screen bg-gradient-to-br from-black via-zinc-900 to-zinc-800 flex items-center justify-center p-6 overflow-hidden text-white relative' },
-                React.createElement(
-                    'div',
-                    { className: 'absolute inset-0 opacity-20' },
-                    React.createElement('div', { className: 'absolute top-10 left-10 text-4xl animate-bounce' }, '✨'),
-                    React.createElement('div', { className: 'absolute top-24 right-16 text-3xl animate-pulse' }, '🎈'),
-                    React.createElement('div', { className: 'absolute bottom-16 left-20 text-4xl animate-pulse' }, '🎂'),
-                    React.createElement('div', { className: 'absolute bottom-20 right-10 text-3xl animate-bounce' }, '🤍')
-                ),
-                !opened ? 
-                React.createElement(
-                    'div',
-                    { className: 'max-w-md w-full bg-white/10 backdrop-blur-xl border border-white/10 rounded-3xl p-10 shadow-2xl text-center' },
-                    React.createElement(
-                        'div',
-                        { className: 'mb-6 flex justify-center' },
-                        React.createElement('img', {
-                            src: './dion-rizqie.jpg',
-                            alt: 'Muhammad Dion Rizqie',
-                            className: 'w-32 h-32 rounded-full border-4 border-white/20 shadow-lg object-cover'
-                        })
-                    ),
-                    React.createElement('h1', { className: 'text-4xl font-bold mb-2 leading-tight' }, 'Muhammad Dion Rizqie 🎁'),
-                    React.createElement('p', { className: 'text-zinc-300 leading-8 mb-8' }, 'Ada sesuatu buat kamu ✨'),
-                    React.createElement('p', { className: 'text-zinc-300 leading-8 mb-8' }, 'Klik tombol di bawah ini ✨'),
-                    React.createElement(
-                        'button',
-                        {
-                            onClick: () => setOpened(true),
-                            className: 'px-8 py-4 rounded-2xl bg-white text-black font-semibold hover:scale-105 transition-all duration-300'
-                        },
-                        'Open Message 🤍'
-                    )
-                ) :
-                React.createElement(
-                    'div',
-                    { className: 'max-w-xl w-full bg-white/10 backdrop-blur-xl border border-white/10 rounded-3xl p-10 shadow-2xl text-center' },
-                    React.createElement(
-                        'div',
-                        { className: 'mb-6 flex justify-center' },
-                        React.createElement('img', {
-                            src: './dion-rizqie.jpg',
-                            alt: 'Muhammad Dion Rizqie',
-                            className: 'w-40 h-40 rounded-full border-4 border-white/20 shadow-lg object-cover'
-                        })
-                    ),
-                    React.createElement('p', { className: 'text-zinc-300 text-sm tracking-[0.3em] mb-4' }, 'HAPPY 17TH BIRTHDAY'),
-                    React.createElement('h1', { className: 'text-3xl md:text-4xl font-bold mb-2 leading-tight' }, 'Muhammad Dion Rizqie 🎉'),
-                    React.createElement('h2', { className: 'text-3xl md:text-4xl font-bold mb-8 leading-tight' }, 'عيد ميلاد سعيد 🤍'),
-                    React.createElement(
-                        'div',
-                        { className: 'space-y-4 text-lg leading-9 text-zinc-100' },
-                        React.createElement('p', null, 'بارك الله في عمرك،'),
-                        React.createElement('p', null, 'وأسعد الله قلبك،'),
-                        React.createElement('p', null, 'وحقّق الله أحلامك،'),
-                        React.createElement('p', null, 'وجعل أيّامك كلّها فرحًا وراحةً.')
-                    ),
-                    React.createElement(
-                        'div',
-                        { className: 'mt-10 text-zinc-300 leading-8 text-base' },
-                        React.createElement('p', null, 'Semoga selalu dikelilingi hal-hal baik,'),
-                        React.createElement('p', null, 'dan semoga semua yang disemogakan'),
-                        React.createElement('p', null, 'pelan-pelan jadi kenyataan ✨')
-                    ),
-                    React.createElement(
-                        'div',
-                        { className: 'mt-10 flex items-center justify-center gap-3 text-3xl animate-pulse' },
-                        React.createElement('span', null, '🎂'),
-                        React.createElement('span', null, '✨'),
-                        React.createElement('span', null, '🤍'),
-                        React.createElement('span', null, '🎉')
-                    )
-                )
-            );
+        // Open message function
+        function openMessage() {
+            document.getElementById('cardContainer').classList.add('hidden');
+            document.getElementById('messageCard').classList.remove('hidden');
         }
-
-        const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(React.createElement(BirthdayGreeting));
     </script>
 </body>
 </html>
