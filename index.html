@@ -6,6 +6,10 @@
     <title>Happy Birthday - Muhammad Dion Rizqie 🎉</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        * {
+            box-sizing: border-box;
+        }
+        
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-10px); }
@@ -48,6 +52,13 @@
                 transform: scale(1);
             }
         }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        
         .animate-bounce {
             animation: bounce 1s infinite;
         }
@@ -63,32 +74,31 @@
         .pop-fade {
             animation: popFade 0.6s ease-out forwards;
         }
-        .hidden {
-            display: none !important;
+        
+        .message-scroll {
+            max-height: 400px;
+            overflow-y: scroll;
+            -webkit-overflow-scrolling: touch;
+            padding: 0 10px;
         }
-        .scroll-container {
-            max-height: 65vh;
-            overflow-y: auto;
-            padding-right: 10px;
+        
+        .message-scroll::-webkit-scrollbar {
+            width: 6px;
         }
-        .scroll-container::-webkit-scrollbar {
-            width: 8px;
-        }
-        .scroll-container::-webkit-scrollbar-track {
+        .message-scroll::-webkit-scrollbar-track {
             background: rgba(255, 255, 255, 0.1);
+        }
+        .message-scroll::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.4);
             border-radius: 10px;
         }
-        .scroll-container::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 10px;
-        }
-        .scroll-container::-webkit-scrollbar-thumb:hover {
-            background: rgba(255, 255, 255, 0.5);
+        .message-scroll::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.6);
         }
     </style>
 </head>
-<body class="m-0 p-0 overflow-hidden">
-    <div class="min-h-screen bg-gradient-to-br from-black via-zinc-900 to-zinc-800 flex items-center justify-center p-6 overflow-hidden text-white relative">
+<body>
+    <div class="min-h-screen bg-gradient-to-br from-black via-zinc-900 to-zinc-800 flex items-center justify-center p-4 text-white relative">
         <!-- Background decorations -->
         <div class="absolute inset-0 opacity-20 pointer-events-none">
             <div class="absolute top-10 left-10 text-4xl animate-bounce">✨</div>
@@ -97,78 +107,69 @@
             <div class="absolute bottom-20 right-10 text-3xl animate-bounce">🤍</div>
         </div>
 
-        <!-- Card Container -->
-        <div id="cardContainer" class="max-w-md w-full bg-white/10 backdrop-blur-xl border border-white/10 rounded-3xl p-10 shadow-2xl text-center animate-in relative z-10">
-            <!-- Image -->
+        <!-- Initial Card -->
+        <div id="cardContainer" class="max-w-md w-full bg-white/10 backdrop-blur-xl border border-white/10 rounded-3xl p-8 shadow-2xl text-center animate-in relative z-10">
             <div class="mb-6 flex justify-center">
                 <img src="./dion-rizqie.jpg" alt="Muhammad Dion Rizqie" class="w-32 h-32 rounded-full border-4 border-white/20 shadow-lg object-cover" onerror="this.src='https://raw.githubusercontent.com/FTLUGHOH/Mabruk-milad/main/dion-rizqie.jpg'">
             </div>
-
-            <!-- Name -->
-            <h1 class="text-4xl font-bold mb-2 leading-tight">Muhammad Dion Rizqie 🎁</h1>
-
-            <!-- Messages -->
-            <p class="text-zinc-300 leading-8 mb-8">Ada sesuatu buat kamu ✨</p>
-            <p class="text-zinc-300 leading-8 mb-8">Klik tombol di bawah ini ✨</p>
-
-            <!-- Button -->
-            <button id="openBtn" onclick="openMessage()" class="px-8 py-4 rounded-2xl bg-white text-black font-semibold hover:scale-105 transition-all duration-300 cursor-pointer border-none">
+            <h1 class="text-3xl font-bold mb-2">Muhammad Dion Rizqie 🎁</h1>
+            <p class="text-zinc-300 mb-6">Ada sesuatu buat kamu ✨</p>
+            <p class="text-zinc-300 mb-8">Klik tombol di bawah ini ✨</p>
+            <button onclick="openMessage()" class="px-8 py-3 rounded-2xl bg-white text-black font-semibold hover:scale-105 transition-all">
                 Open Message 🤍
             </button>
         </div>
 
-        <!-- Full Message Card (Hidden) -->
-        <div id="messageCard" class="hidden max-w-2xl w-full bg-white/10 backdrop-blur-xl border border-white/10 rounded-3xl p-10 shadow-2xl text-center animate-up relative z-10 flex flex-col">
-            <!-- Image -->
-            <div class="mb-6 flex justify-center flex-shrink-0">
-                <img src="./dion-rizqie.jpg" alt="Muhammad Dion Rizqie" class="w-40 h-40 rounded-full border-4 border-white/20 shadow-lg object-cover" onerror="this.src='https://raw.githubusercontent.com/FTLUGHOH/Mabruk-milad/main/dion-rizqie.jpg'">
+        <!-- Message Card -->
+        <div id="messageCard" class="hidden max-w-lg w-full bg-white/10 backdrop-blur-xl border border-white/10 rounded-3xl p-8 shadow-2xl text-center animate-up relative z-10 max-h-screen flex flex-col">
+            <!-- Fixed Header -->
+            <div class="flex-shrink-0">
+                <div class="mb-4 flex justify-center">
+                    <img src="./dion-rizqie.jpg" alt="Muhammad Dion Rizqie" class="w-40 h-40 rounded-full border-4 border-white/20 shadow-lg object-cover" onerror="this.src='https://raw.githubusercontent.com/FTLUGHOH/Mabruk-milad/main/dion-rizqie.jpg'">
+                </div>
+                <p class="text-zinc-300 text-sm tracking-widest mb-3">HAPPY 17TH BIRTHDAY</p>
+                <h1 class="text-3xl font-bold mb-1">Muhammad Dion Rizqie 🎉</h1>
+                <h2 class="text-2xl font-bold mb-6">عيد ميلاد سعيد 🤍</h2>
             </div>
 
-            <!-- Header -->
-            <p class="text-zinc-300 text-sm tracking-[0.3em] mb-4 flex-shrink-0">HAPPY 17TH BIRTHDAY</p>
-
-            <!-- Names -->
-            <h1 class="text-3xl md:text-4xl font-bold mb-2 leading-tight flex-shrink-0">Muhammad Dion Rizqie 🎉</h1>
-            <h2 class="text-3xl md:text-4xl font-bold mb-8 leading-tight flex-shrink-0">عيد ميلاد سعيد 🤍</h2>
-
             <!-- Scrollable Messages -->
-            <div class="scroll-container flex-grow">
+            <div class="message-scroll flex-grow">
                 <!-- Arabic Blessings -->
-                <div class="space-y-4 text-lg leading-9 text-zinc-100 mb-8">
+                <div class="space-y-3 text-base leading-8 text-zinc-100 mb-6">
                     <p class="pop-fade" style="animation-delay: 0s">بارك الله في عمرك،</p>
                     <p class="pop-fade" style="animation-delay: 0.1s">وأسعد الله قلبك،</p>
                     <p class="pop-fade" style="animation-delay: 0.2s">وحقّق الله أحلامك،</p>
                     <p class="pop-fade" style="animation-delay: 0.3s">وجعل أيّامك كلّها فرحًا وراحةً.</p>
                 </div>
 
-                <!-- Indonesian Messages 1 -->
-                <div class="mt-8 text-zinc-300 leading-8 text-base space-y-2 mb-8">
+                <!-- Message 1 -->
+                <div class="text-zinc-300 text-sm leading-7 space-y-2 mb-6">
                     <p class="pop-fade" style="animation-delay: 0.4s">Semoga selalu dikelilingi hal-hal baik,</p>
                     <p class="pop-fade" style="animation-delay: 0.5s">dan semoga semua yang disemogakan</p>
                     <p class="pop-fade" style="animation-delay: 0.6s">pelan-pelan jadi kenyataan ✨</p>
                 </div>
 
-                <!-- Indonesian Messages 2 -->
-                <div class="mt-8 text-zinc-300 leading-8 text-base space-y-2 mb-8">
+                <!-- Message 2 -->
+                <div class="text-zinc-300 text-sm leading-7 space-y-2 mb-6">
                     <p class="pop-fade" style="animation-delay: 0.7s">Semoga semua doa baik</p>
                     <p class="pop-fade" style="animation-delay: 0.8s">pelan-pelan jadi nyata.</p>
                 </div>
 
-                <!-- Indonesian Messages 3 -->
-                <div class="mt-8 text-zinc-300 leading-8 text-base space-y-2 mb-8">
+                <!-- Message 3 -->
+                <div class="text-zinc-300 text-sm leading-7 space-y-2 mb-6">
                     <p class="pop-fade" style="animation-delay: 0.9s">Semoga selalu diberi bahagia,</p>
                     <p class="pop-fade" style="animation-delay: 1s">hati yang tenang,</p>
                     <p class="pop-fade" style="animation-delay: 1.1s">dan langkah yang dimudahkan.</p>
                 </div>
 
                 <!-- Special Message -->
-                <div class="mt-10 text-2xl md:text-3xl font-bold text-center mb-8">
+                <div class="text-xl font-bold text-center mb-4">
                     <p class="pop-fade" style="animation-delay: 1.2s">17 looks good on you ✨🎉</p>
                 </div>
             </div>
 
-            <!-- Emoji Footer -->
-            <div class="mt-6 flex items-center justify-center gap-3 text-3xl animate-pulse flex-shrink-0">
+            <!-- Fixed Footer -->
+            <div class="flex-shrink-0 mt-6 flex items-center justify-center gap-3 text-2xl animate-pulse">
                 <span>🎂</span>
                 <span>✨</span>
                 <span>🤍</span>
@@ -178,27 +179,16 @@
     </div>
 
     <script>
-        // Start audio on page load
+        // Audio
         window.addEventListener('load', function() {
             const audio = new Audio('./birthday-song.mp3');
             audio.loop = true;
             audio.volume = 0.5;
-            
-            // Try to play
-            const playPromise = audio.play();
-            if (playPromise !== undefined) {
-                playPromise.catch(error => {
-                    console.log("Autoplay prevented, waiting for user interaction");
-                    // Fallback: play on first click
-                    document.addEventListener('click', function playOnClick() {
-                        audio.play();
-                        document.removeEventListener('click', playOnClick);
-                    }, { once: true });
-                });
-            }
+            audio.play().catch(() => {
+                document.addEventListener('click', () => audio.play(), { once: true });
+            });
         });
 
-        // Open message function
         function openMessage() {
             document.getElementById('cardContainer').classList.add('hidden');
             document.getElementById('messageCard').classList.remove('hidden');
