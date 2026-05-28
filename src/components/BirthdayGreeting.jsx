@@ -1,8 +1,21 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 
 export default function BirthdayGreeting() {
   const [opened, setOpened] = useState(false)
+
+  useEffect(() => {
+    const audio = new Audio("https://raw.githubusercontent.com/FTLUGHOH/Mabruk-milad/main/public/birthday-song.mp3")
+    audio.autoplay = true
+    audio.loop = true
+    audio.volume = 0.5
+    audio.play().catch(error => console.log("Autoplay prevented:", error))
+
+    return () => {
+      audio.pause()
+      audio.currentTime = 0
+    }
+  }, [])
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-zinc-900 to-zinc-800 flex items-center justify-center p-6 overflow-hidden text-white relative">
