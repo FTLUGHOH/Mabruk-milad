@@ -40,13 +40,13 @@ export default function BirthdayGreeting() {
           >
             <img
               src="https://raw.githubusercontent.com/FTLUGHOH/Mabruk-milad/main/public/dion-rizqie.jpg"
-              alt="Dion Rizqie"
+              alt="Muhammad Dion Rizqie"
               className="w-32 h-32 rounded-full border-4 border-white/20 shadow-lg object-cover"
             />
           </motion.div>
 
           <h1 className="text-4xl font-bold mb-2 leading-tight">
-            Dion Rizqie 🎁
+            Muhammad Dion Rizqie 🎁
           </h1>
 
           <p className="text-zinc-300 leading-8 mb-8">
@@ -79,7 +79,7 @@ export default function BirthdayGreeting() {
           >
             <img
               src="https://raw.githubusercontent.com/FTLUGHOH/Mabruk-milad/main/public/dion-rizqie.jpg"
-              alt="Dion Rizqie"
+              alt="Muhammad Dion Rizqie"
               className="w-40 h-40 rounded-full border-4 border-white/20 shadow-lg object-cover"
             />
           </motion.div>
@@ -94,7 +94,7 @@ export default function BirthdayGreeting() {
             transition={{ duration: 0.6 }}
             className="text-3xl md:text-4xl font-bold mb-2 leading-tight"
           >
-            Dion Rizqie 🎉
+            Muhammad Dion Rizqie 🎉
           </motion.h1>
 
           <motion.h2
